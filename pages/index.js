@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button, Box, Flex, Text } from '@chakra-ui/react'
 
+import Property from '../components/Property'
+import { baseUrl, fetchApi } from '../utils/fetchApi'
+
 const Banner = ({purpose, imageUrl, linkName, buttonText, title1, title2, desc1, desc2}) => (
   <Flex flexWrap="wrap" justifyContent="center" alignItems="center" m="3">
     <Image src={imageUrl} alt="Banner" width={500} height={300} />
@@ -10,17 +13,17 @@ const Banner = ({purpose, imageUrl, linkName, buttonText, title1, title2, desc1,
       <Text color="gray.500" fontWeight="medium" fontSize="sm">{purpose}</Text>
       <Text fontSize="3xl" fontWeight="bold">{title1}<br/>{title2}</Text>
       <Text fontSize="lg" paddingTop="3" paddingBottom="3" color="gray.700">{desc1}<br/>{desc2}</Text>
-      <Button fontSize="lg" color="black" variant="outlined">
+      <Button fontSize="lg">
         <Link href={linkName}>{buttonText}</Link>
       </Button>
     </Box>
   </Flex>
 )
 
-export default function Home() {
+export default function Home({propertiesForRent, propertiesForSale}) {
+  console.log(propertiesForRent, propertiesForSale);
   return (
-    <Box>
-      <h1>Selling Sunset</h1>
+    <Box m="5">
       <Banner 
       purpose="RENT A HOME"
       title1="Rentals houses for"
@@ -33,7 +36,8 @@ export default function Home() {
 
       />
       <Flex flexWrap="wrap">
-        {/* Fetch properties from API */}
+        {/* Fetch properties from API and map over them */}
+        {propertiesForRent.map((property) => <Property property={property} key={property.id}/>)}
       </Flex>
       <Banner 
       purpose="BUY A HOME"
@@ -46,7 +50,25 @@ export default function Home() {
       linkName="/search?purpose=for-sale"
 
       />
+      <Flex flexWrap="wrap">
+        {propertiesForSale.map((property) => <Property property={property} key={property.id}/>)}
+      </Flex>
     </Box>
     
   )
+}
+
+//api call
+export async function getStaticProps() {
+  const propertyForSale = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`)
+  const propertyForRent = await fetchApi(`${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`)
+
+
+  //pass to Home component
+  return {
+    props: {
+      propertiesForSale: propertyForSale?.hits,
+      propertiesForRent: propertyForRent?.hits
+    }
+  }
 }
