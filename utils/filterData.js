@@ -27,7 +27,7 @@ export const filterData = [
         { name: '60,000', value: '60000' },
         { name: '85,000', value: '85000' },
       ],
-      placeholder: 'Min Price(KSH)',
+      placeholder: 'Min Price(KSH                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       )',
       queryName: 'minPrice',
     },
     {

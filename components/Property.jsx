@@ -9,7 +9,7 @@ import DefaultImage from '../assets/images/sa-rapita-ge58e9c8fc_1920.jpg';
 
 const Property = ({ property: { coverPhoto, rentFrequency, price, rooms, title, baths, area, agency, isVerified, externalID} }) => (
     <Link href={`/property/${externalID}`} passHref>
-        <Flex flexWrap="wrap" width="400px" p="5" paddingTop="0" justifyContent="flex-start" cursor="pointer">
+        <Flex flexWrap="wrap" width="380px" p="5" paddingTop="0" justifyContent="flex-start" cursor="pointer">
             <Box width="full">
                 <Image src={coverPhoto ? coverPhoto.url: DefaultImage} width={400} height={260} alt="House"/>
             </Box>
