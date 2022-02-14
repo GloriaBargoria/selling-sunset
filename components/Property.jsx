@@ -5,7 +5,7 @@ import { FaBed, FaBath } from 'react-icons/fa';
 import {BsGridFill } from 'react-icons/bs';
 import { GoVerified } from 'react-icons/go';
 import millify from "millify";
-import DefaultImage from '../assets/images/sa-rapita-ge58e9c8fc_1920.jpg';
+import DefaultImage from '../assets/images/house-1477041_640.jpg';
 
 const Property = ({ property: { coverPhoto, rentFrequency, price, rooms, title, baths, area, agency, isVerified, externalID} }) => (
     <Link href={`/property/${externalID}`} passHref>
