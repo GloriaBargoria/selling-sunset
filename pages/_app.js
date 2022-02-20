@@ -4,6 +4,7 @@ import Router from 'next/router'
 import NProgress from 'nprogress'
 import Head from 'next/head'
 
+
 import Layout from '../components/Layout'
 
 function MyApp({ Component, pageProps }) {
